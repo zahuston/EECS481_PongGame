@@ -1,0 +1,148 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
+
+namespace EECS481_HW2
+{
+    
+    /// <summary>
+    /// This is the main type for your game
+    /// </summary>  
+    public class Game1 : Microsoft.Xna.Framework.Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+
+        Texture2D pong1, pong2, ball;
+        Rectangle pong1Pos, pong2Pos, ballPos;
+        Rectangle screenDimensions;
+        String p1Score, p2Score;
+        Vector2 ballVelocity;
+        Vector2 screenSize;
+
+        public Game1()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        /// <summary>
+        /// Allows the game to perform any initialization it needs to before starting to run.
+        /// This is where it can query for any required services and load any non-graphic
+        /// related content.  Calling base.Initialize will enumerate through any components
+        /// and initialize them as well.
+        /// </summary>
+        protected override void Initialize()
+        {
+            // Sets the initial/resting positions of the ball and the two sliders
+            pong1Pos = new Rectangle(10, 200, 30, 70);
+            pong2Pos = new Rectangle(760, 200, 30, 70);
+            ballPos = new Rectangle(380, 220, 30, 36);
+            ballVelocity.X = 1;
+            ballVelocity.Y = 1;
+            screenSize = new Vector2(this.GraphicsDevice.Viewport.Width, this.GraphicsDevice.Viewport.Height);
+            base.Initialize();
+        }
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            pong1 = Content.Load<Texture2D>("WhiteBox");
+            pong2 = Content.Load<Texture2D>("WhiteBox");
+            ball = Content.Load<Texture2D>("PongBall");
+            // TODO: use this.Content to load your game content here
+        }
+
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// all content.
+        /// </summary>
+        protected override void UnloadContent()
+        {
+            Content.Unload();
+            // TODO: Unload any non ContentManager content here
+        }
+
+        protected bool outOfBounds(Rectangle check, int yChange, int xChange)
+        {
+            if (check.Y + yChange < 0 || check.Y + check.Height + yChange > screenSize.Y ||
+                check.X + xChange < -)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Update(GameTime gameTime)
+        {
+            KeyboardState keyState = Keyboard.GetState();
+            // Allows the game to exit
+            int moveSpeed = 2;
+            if (keyState.IsKeyDown(Keys.Escape))
+                this.Exit();
+
+            if (keyState.IsKeyDown(Keys.A) && pong1Pos.Y - moveSpeed > 0 ) //Move right pong down
+            {
+                pong1Pos.Y -= moveSpeed;
+            }
+            else if (keyState.IsKeyDown(Keys.Z) && pong1Pos.Y + moveSpeed > screenSize.Y) //Move left pong down
+            {
+                pong1Pos.Y += moveSpeed;
+            }
+
+            if (keyState.IsKeyDown(Keys.K))
+            {
+                pong2Pos.Y -= moveSpeed;
+            }
+            else if (keyState.IsKeyDown(Keys.M))
+            {
+                pong2Pos.Y += moveSpeed;
+            }
+
+            ballPos.X += (moveSpeed / 2) * (int)ballVelocity.X;
+            ballPos.Y += (moveSpeed / 2) * (int)ballVelocity.Y;
+
+            base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
+            // TODO: Add your drawing code here
+            DrawMovingElements(spriteBatch);
+            spriteBatch.End();
+            base.Draw(gameTime);
+        }
+
+        private void DrawMovingElements(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(pong1, pong1Pos, Color.White);
+            spriteBatch.Draw(pong2, pong2Pos, Color.White);
+            spriteBatch.Draw(ball, ballPos, Color.White);
+        }
+    }
+
+ 
+}

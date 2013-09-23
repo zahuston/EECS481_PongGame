@@ -1,0 +1,9 @@
+c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\EECS481_HW2.exe
+c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\EECS481_HW2.pdb
+c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\obj\x86\Debug\EECS481_HW2.exe
+c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\obj\x86\Debug\EECS481_HW2.pdb
+c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\WhiteBox.xnb
+C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\PongBall.xnb
+C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\SpriteFont1.xnb
