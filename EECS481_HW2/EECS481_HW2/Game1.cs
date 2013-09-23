@@ -12,21 +12,30 @@ using Microsoft.Xna.Framework.Media;
 
 namespace EECS481_HW2
 {
-    
+
     /// <summary>
     /// This is the main type for your game
-    /// </summary>  
+    /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        SpriteFont gameFont;
         Texture2D pong1, pong2, ball;
         Rectangle pong1Pos, pong2Pos, ballPos;
         Rectangle screenDimensions;
-        String p1Score, p2Score;
+        int p1Score, p2Score;
         Vector2 ballVelocity;
         Vector2 screenSize;
+
+        public enum collisionType
+        {
+            NoCollision = 0,
+            TopCollision,
+            BottomCollision,
+            LeftCollision,
+            RightCollision
+        }
 
         public Game1()
         {
@@ -46,8 +55,8 @@ namespace EECS481_HW2
             pong1Pos = new Rectangle(10, 200, 30, 70);
             pong2Pos = new Rectangle(760, 200, 30, 70);
             ballPos = new Rectangle(380, 220, 30, 36);
-            ballVelocity.X = 1;
-            ballVelocity.Y = 1;
+            ballVelocity.X = 3;
+            ballVelocity.Y = 3;
             screenSize = new Vector2(this.GraphicsDevice.Viewport.Width, this.GraphicsDevice.Viewport.Height);
             base.Initialize();
         }
@@ -63,6 +72,7 @@ namespace EECS481_HW2
             pong1 = Content.Load<Texture2D>("WhiteBox");
             pong2 = Content.Load<Texture2D>("WhiteBox");
             ball = Content.Load<Texture2D>("PongBall");
+            gameFont = Content.Load<SpriteFont>("SpriteFont1");
             // TODO: use this.Content to load your game content here
         }
 
@@ -76,12 +86,63 @@ namespace EECS481_HW2
             // TODO: Unload any non ContentManager content here
         }
 
-        protected bool outOfBounds(Rectangle check, int yChange, int xChange)
+        protected bool handlePossibleCollisions(Rectangle check, int xChange, int yChange, bool shouldHandleDirection)
         {
-            if (check.Y + yChange < 0 || check.Y + check.Height + yChange > screenSize.Y ||
-                check.X + xChange < -)
+            collisionType collision = collisionType.NoCollision;
+            if (check.Y + yChange < 0)
             {
-                return false;
+                collision = collisionType.TopCollision;
+            }
+            else if (check.Y + check.Height + yChange > screenSize.Y)
+            {
+                collision = collisionType.BottomCollision;
+            }
+            else if (check.X + xChange < 0)
+            {
+                collision = collisionType.LeftCollision;
+                if (shouldHandleDirection) p1Score++;
+            }
+            else if (shouldHandleDirection && ballPos.Intersects(pong1Pos))
+            {
+                collision = collisionType.LeftCollision;
+            }
+            else if (check.X + check.Width + xChange > screenSize.X)
+            {
+                if (shouldHandleDirection) p2Score++;
+                collision = collisionType.RightCollision;
+            }
+            else if (shouldHandleDirection && ballPos.Intersects(pong2Pos))
+            {
+                collision = collisionType.RightCollision;
+            }
+            if (collision != collisionType.NoCollision)
+            {
+                if (shouldHandleDirection)
+                {
+                    redirectBall(collision);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        protected void redirectBall(collisionType collision)
+        {
+            if (collision == collisionType.TopCollision)
+            {
+                ballVelocity.Y *= -1;
+            }
+            else if (collision == collisionType.LeftCollision)
+            {
+                ballVelocity.X *= -1;
+            }
+            else if (collision == collisionType.BottomCollision)
+            {
+                ballVelocity.Y *= -1;
+            }
+            else
+            {
+                ballVelocity.X *= -1;
             }
         }
 
@@ -98,23 +159,25 @@ namespace EECS481_HW2
             if (keyState.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            if (keyState.IsKeyDown(Keys.A) && pong1Pos.Y - moveSpeed > 0 ) //Move right pong down
+            if (keyState.IsKeyDown(Keys.A) && !handlePossibleCollisions(pong1Pos, 0, -moveSpeed, false)) //Move right pong down
             {
                 pong1Pos.Y -= moveSpeed;
             }
-            else if (keyState.IsKeyDown(Keys.Z) && pong1Pos.Y + moveSpeed > screenSize.Y) //Move left pong down
+            else if (keyState.IsKeyDown(Keys.Z) && !handlePossibleCollisions(pong1Pos, 0, moveSpeed, false)) //Move left pong down
             {
                 pong1Pos.Y += moveSpeed;
             }
 
-            if (keyState.IsKeyDown(Keys.K))
+            if (keyState.IsKeyDown(Keys.K) && !handlePossibleCollisions(pong2Pos, 0, -moveSpeed, false))
             {
                 pong2Pos.Y -= moveSpeed;
             }
-            else if (keyState.IsKeyDown(Keys.M))
+            else if (keyState.IsKeyDown(Keys.M) && !handlePossibleCollisions(pong2Pos, 0, moveSpeed, false))
             {
                 pong2Pos.Y += moveSpeed;
             }
+            if (handlePossibleCollisions(ballPos, (moveSpeed / 2) * (int)ballVelocity.X, (moveSpeed / 2) * (int)ballVelocity.Y, true)) ;
+
 
             ballPos.X += (moveSpeed / 2) * (int)ballVelocity.X;
             ballPos.Y += (moveSpeed / 2) * (int)ballVelocity.Y;
@@ -136,13 +199,15 @@ namespace EECS481_HW2
             base.Draw(gameTime);
         }
 
-        private void DrawMovingElements(SpriteBatch spriteBatch)
+        protected void DrawMovingElements(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(pong1, pong1Pos, Color.White);
             spriteBatch.Draw(pong2, pong2Pos, Color.White);
             spriteBatch.Draw(ball, ballPos, Color.White);
+            spriteBatch.DrawString(gameFont, "Player1 Score : " + p1Score.ToString(), new Vector2(20, 20), Color.Black);
+            spriteBatch.DrawString(gameFont, "Player2 Score : " + p2Score.ToString(), new Vector2(500, 20), Color.Black);
         }
     }
 
- 
+
 }

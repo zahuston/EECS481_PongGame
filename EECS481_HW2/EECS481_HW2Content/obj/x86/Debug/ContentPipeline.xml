@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\WhiteBox.xnb</Output>
+      <Output>C:\Users\zahuston\Desktop\PongGit\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\WhiteBox.xnb</Output>
       <Time>2013-09-19T15:40:06.7378067-04:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\PongBall.xnb</Output>
+      <Output>C:\Users\zahuston\Desktop\PongGit\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\PongBall.xnb</Output>
       <Time>2013-09-19T16:13:03.6092797-04:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Output>C:\Users\zahuston\Desktop\PongGit\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
       <Time>2013-09-20T17:30:44.2021916-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -34,10 +34,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\zahuston\documents\visual studio 2010\Projects\EECS481_HW2\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\zahuston\Desktop\PongGit\EECS481_HW2\EECS481_HW2Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\zahuston\Desktop\PongGit\EECS481_HW2\EECS481_HW2\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\zahuston\Desktop\PongGit\EECS481_HW2\EECS481_HW2Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\zahuston\Desktop\PongGit\EECS481_HW2\EECS481_HW2\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
